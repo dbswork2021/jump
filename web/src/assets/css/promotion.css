@@ -1,0 +1,17 @@
+.imgBox {
+  position: absolute;
+}
+.avatar-uploader > .ant-upload-select-picture-card {
+  display: block;
+  width: 100%;
+  height: 500px;
+}
+.avatar-uploader > .ant-upload-select-picture-card > .ant-upload {
+  display: block;
+  min-width: 300px;
+}
+
+.code {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
