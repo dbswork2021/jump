@@ -59,7 +59,7 @@ const Download = () => {
                 disabled
                 showUploadList={false}
               >
-                {formData.fileName != '' ? (
+                {formData.fileName !== '' ? (
                   <img
                     src={
                       process.env.REACT_APP_SERVER_PORT_FILE + formData.fileName

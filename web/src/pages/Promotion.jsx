@@ -88,11 +88,10 @@ const Promotion = () => {
             beforeUpload={beforeUpload}
             onChange={handleChange}
           >
-            {formData.fileName != '' ? (
+            {formData.fileName !== '' ? (
               <img
                 src={process.env.REACT_APP_SERVER_PORT_FILE + formData.fileName}
                 style={{ display: 'block', width: '100%' }}
-                alt="avatar"
               ></img>
             ) : (
               ''

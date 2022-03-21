@@ -2,43 +2,10 @@ import { Table, Row, Col, DatePicker } from 'antd';
 import { Bar } from '@ant-design/charts';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { StatsApi, StatsSearchApi } from '../utils/api';
+import { StatsApi } from '../utils/api';
 
 const { Column } = Table;
 
-const data = [
-  {
-    key: '1',
-    agent: '测试',
-    city: '北京',
-    system: 'android',
-    browser: '微信',
-    createTime: '2021/01/02 20:22:20',
-  },
-];
-
-const chartsData = [
-  {
-    key: '1',
-    city: '北京',
-    count: 96,
-  },
-  {
-    key: '2',
-    city: '河北',
-    count: 30,
-  },
-  {
-    key: '3',
-    city: '邢台',
-    count: 50,
-  },
-  {
-    key: '4',
-    city: '广州',
-    count: 20,
-  },
-];
 const Stats = () => {
   const { id } = useParams();
   const [tableData, setTableData] = useState([]);
