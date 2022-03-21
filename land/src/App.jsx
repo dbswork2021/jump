@@ -4,6 +4,8 @@ import { CommonDataApi } from './utils/api';
 
 const Index = () => {
   const { id } = useParams();
+  console.log(id);
+
   useEffect(() => {
     let model = {
       ip: sessionStorage.getItem('ip'),

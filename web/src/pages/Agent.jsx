@@ -26,7 +26,8 @@ const Agent = () => {
           key: element._id,
           nick: element.url.nick,
           url: element.url._id,
-          downurl: window.location.host + '/#/download/' + element._id,
+          downurl:
+            'http://' + window.location.host + '/#/download/' + element._id,
           createTime: new Date(element.createTime).toLocaleString(),
         });
       });
