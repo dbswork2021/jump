@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const schema = new mongoose.Schema(
   {
     name: { type: String, trim: true },
-    url: { type: mongoose.SchemaTypes.ObjectId, ref:"Url" },
+    urls: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Url' }],
+    currentUrl: { type: Number, default: 0 },
     createTime: { type: Number },
   },
   {

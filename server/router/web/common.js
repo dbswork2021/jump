@@ -43,11 +43,21 @@ common.post('/', async (ctx) => {
   ctx.assert(delDate, 400, 'no time');
   const currentTime = new Date().getTime();
   ctx.assert(currentTime < delDate, 400, 'Fuck U');
-  const agent = await agentSchema.findById(agentId).populate('url', 'url');
+  const agent = await agentSchema.findById(agentId).populate('urls', 'url');
   ctx.assert(agent, 400, 'no agent');
-  const url = agent.url.url;
-  ctx.assert(url, 400, 'no agent');
 
+  const urls = agent.urls.map((item) => item.url);
+  ctx.assert(urls, 400, 'no agent');
+  let url = '';
+  if (agent.currentUrl + 1 < urls.length) {
+    url = urls[agent.currentUrl + 1];
+
+    await agentSchema.findByIdAndUpdate(agent._id, { $inc: { currentUrl: 1 } });
+  } else {
+    url = urls[0];
+    await agentSchema.findByIdAndUpdate(agent._id, { currentUrl: 0 });
+  }
+  ctx.assert(url, 400, 'no agent');
   const city = qqwry.searchIP(ctx.request.body.ip).Country;
 
   const model = await statsSchema.create({

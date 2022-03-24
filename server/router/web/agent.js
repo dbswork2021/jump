@@ -1,15 +1,18 @@
 const Router = require('koa-router');
 const agent = new Router();
 const schema = require('../../model/web/agent');
-const urlSchema = require('../../model/web/url')
+const urlSchema = require('../../model/web/url');
 
 agent.get('/', async (ctx) => {
-  const data = await schema.find().populate("url",{nick: 1}).sort({ _id: -1 });
-	const urls = await urlSchema.find().select({nick: 1})
+  const data = await schema
+    .find()
+    .populate('urls', { nick: 1 })
+    .sort({ _id: -1 });
+  const urls = await urlSchema.find().select({ nick: 1 });
   ctx.body = {
-		data,
-		urls
-	};
+    data,
+    urls,
+  };
 });
 
 agent.post('/', async (ctx) => {
@@ -21,12 +24,12 @@ agent.post('/', async (ctx) => {
 });
 
 agent.put('/', async (ctx) => {
-  const { _id, name, url } = ctx.request.body;
+  const { _id, name, urls } = ctx.request.body;
   const model = await schema.findByIdAndUpdate(
     _id,
     {
       name,
-      url,
+      urls,
     },
     { new: true }
   );

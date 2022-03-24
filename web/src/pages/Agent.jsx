@@ -1,4 +1,4 @@
-import { Table, Button, Form, Input, Drawer, Select } from 'antd';
+import { Table, Tag, Button, Form, Input, Drawer, Select } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import { AgentApi, AgentAddApi, AgentEditApi, AgentDelApi } from 'utils/api';
@@ -24,8 +24,8 @@ const Agent = () => {
         arr.push({
           ...element,
           key: element._id,
-          nick: element.url.nick,
-          url: element.url._id,
+          nick: element.urls.map((item) => item.nick),
+          urls: element.urls.map((item) => item._id),
           downurl:
             'http://' + window.location.host + '/#/download/' + element._id,
           createTime: new Date(element.createTime).toLocaleString(),
@@ -89,11 +89,11 @@ const Agent = () => {
           <Input prefix={<UserOutlined />} placeholder="代理名称" />
         </Form.Item>
         <Form.Item
-          name="url"
+          name="urls"
           style={{ width: '600px' }}
           rules={[{ required: true, message: '请选择代理的跳转链接!' }]}
         >
-          <Select options={urlsSource} placeholder="跳转链接" />
+          <Select mode="multiple" options={urlsSource} placeholder="跳转链接" />
         </Form.Item>
         <Form.Item shouldUpdate>
           {() => (
@@ -113,7 +113,20 @@ const Agent = () => {
       </Form>
       <Table dataSource={dataSource}>
         <Column title="昵称" dataIndex="name" key="name" />
-        <Column title="链接标识" dataIndex="nick" key="nick" />
+        <Column
+          title="链接标识"
+          dataIndex="nick"
+          key="nick"
+          render={(tags) => (
+            <>
+              {tags.map((tag) => (
+                <Tag color="blue" key={tag}>
+                  {tag}
+                </Tag>
+              ))}
+            </>
+          )}
+        />
         <Column title="下载地址" dataIndex="downurl" key="downurl" />
         <Column title="时间" dataIndex="createTime" key="createTime" />
         <Column
@@ -153,10 +166,14 @@ const Agent = () => {
             <Input prefix={<UserOutlined />} placeholder="代理名称" />
           </Form.Item>
           <Form.Item
-            name="url"
+            name="urls"
             rules={[{ required: true, message: '请选择代理的跳转链接!' }]}
           >
-            <Select options={urlsSource} placeholder="跳转链接" />
+            <Select
+              mode="multiple"
+              options={urlsSource}
+              placeholder="跳转链接"
+            />
           </Form.Item>
           <Form.Item shouldUpdate>
             {() => (
