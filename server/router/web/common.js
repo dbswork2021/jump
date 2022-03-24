@@ -23,7 +23,7 @@ common.put('/', async (ctx) => {
 
   const data = {
     text: agent.name,
-    date: dateArr[1] + '-' + dateArr[2],
+    date: dateArr[0] + '-' + dateArr[1],
     url,
   };
   ctx.body = { sets, data };

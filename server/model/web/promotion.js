@@ -10,6 +10,7 @@ const schema = new mongoose.Schema({
   dateX: Number,
   dateY: Number,
   fileName: String,
+  color: String,
   delTime: Number,
 });
 

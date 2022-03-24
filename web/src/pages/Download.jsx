@@ -20,6 +20,7 @@ const Download = () => {
     agentY: 10,
     dateX: 20,
     dateY: 20,
+    color: '#ffffff',
     fileName: '',
   });
   const [data, setData] = useState({
@@ -88,6 +89,7 @@ const Download = () => {
                     fontSize: formData.fontSize,
                     top: formData.agentY + '%',
                     left: formData.agentX + '%',
+                    color: formData.color,
                   }}
                 >
                   {data.text}
@@ -98,6 +100,7 @@ const Download = () => {
                     fontSize: formData.fontSize,
                     top: formData.dateY + '%',
                     left: formData.dateX + '%',
+                    color: formData.color,
                   }}
                 >
                   {data.date}

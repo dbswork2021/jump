@@ -11,6 +11,7 @@ import {
 import moment from 'moment';
 import QRCode from 'qrcode.react';
 import { useEffect, useState } from 'react';
+import { CompactPicker } from 'react-color';
 import { PromotionApi, PromotionEditApi } from 'utils/api';
 
 import 'assets/css/promotion.css';
@@ -34,6 +35,7 @@ const Promotion = () => {
     dateX: 20,
     dateY: 20,
     fileName: '',
+    color: '#ffffff',
     delTime: moment(new Date().getTime()),
   });
 
@@ -62,6 +64,10 @@ const Promotion = () => {
 
   const onChange = (value, type) => {
     const obj = { ...formData, [type]: value };
+    setFormData(obj);
+  };
+  const onColorChange = (color) => {
+    const obj = { ...formData, color: color.hex };
     setFormData(obj);
   };
 
@@ -114,6 +120,7 @@ const Promotion = () => {
                 fontSize: formData.fontSize,
                 top: formData.agentY + '%',
                 left: formData.agentX + '%',
+                color: formData.color,
               }}
             >
               文字
@@ -124,6 +131,7 @@ const Promotion = () => {
                 fontSize: formData.fontSize,
                 top: formData.dateY + '%',
                 left: formData.dateX + '%',
+                color: formData.color,
               }}
             >
               日期
@@ -149,14 +157,14 @@ const Promotion = () => {
             />
           </Form.Item>
 
-          <Form.Item label="QR-X">
+          <Form.Item label="QR横坐标">
             <InputNumber
               min={10}
               value={formData.qrX}
               onChange={(value) => onChange(value, 'qrX')}
             />
           </Form.Item>
-          <Form.Item label="QR-Y">
+          <Form.Item label="QR纵坐标">
             <InputNumber
               min={10}
               value={formData.qrY}
@@ -172,14 +180,14 @@ const Promotion = () => {
             />
           </Form.Item>
 
-          <Form.Item label="agent-X">
+          <Form.Item label="代理名横坐标">
             <InputNumber
               min={10}
               value={formData.agentX}
               onChange={(value) => onChange(value, 'agentX')}
             />
           </Form.Item>
-          <Form.Item label="agent-Y">
+          <Form.Item label="代理名纵坐标">
             <InputNumber
               min={10}
               value={formData.agentY}
@@ -187,18 +195,24 @@ const Promotion = () => {
             />
           </Form.Item>
 
-          <Form.Item label="date-X">
+          <Form.Item label="日期横坐标">
             <InputNumber
               min={10}
               value={formData.dateX}
               onChange={(value) => onChange(value, 'dateX')}
             />
           </Form.Item>
-          <Form.Item label="date-Y">
+          <Form.Item label="日期纵坐标">
             <InputNumber
               min={10}
               value={formData.dateY}
               onChange={(value) => onChange(value, 'dateY')}
+            />
+          </Form.Item>
+          <Form.Item label="字体颜色">
+            <CompactPicker
+              color={formData.color}
+              onChangeComplete={onColorChange}
             />
           </Form.Item>
           <Form.Item label="过期时间">

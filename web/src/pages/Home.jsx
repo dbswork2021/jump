@@ -15,6 +15,7 @@ const Home = () => {
           key: agent.split('-')[1],
           agent: agent.split('-')[0],
           count: res.data[agent],
+          time: new Date().toLocaleDateString(),
         });
       }
       setData(newData);
