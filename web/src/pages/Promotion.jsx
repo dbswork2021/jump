@@ -79,67 +79,65 @@ const Promotion = () => {
     PromotionEditApi(model);
   };
   return (
-    <Row gutter={24}>
-      <Col span={6} style={{ padding: 0 }}>
-        <div className="imgBox">
-          <Upload
-            name="img"
-            listType="picture-card"
-            className="avatar-uploader"
-            showUploadList={false}
-            action={process.env.REACT_APP_SERVER_PORT + 'uploads'}
-            headers={{
-              Authorization: `Bearer ${localStorage.__web_token}`,
-            }}
-            beforeUpload={beforeUpload}
-            onChange={handleChange}
+    <div className="promotion">
+      <div className="imgBox">
+        <Upload
+          name="img"
+          listType="picture-card"
+          className="avatar-uploader"
+          showUploadList={false}
+          action={process.env.REACT_APP_SERVER_PORT + 'uploads'}
+          headers={{
+            Authorization: `Bearer ${localStorage.__web_token}`,
+          }}
+          beforeUpload={beforeUpload}
+          onChange={handleChange}
+        >
+          {formData.fileName !== '' ? (
+            <img
+              src={process.env.REACT_APP_SERVER_PORT_FILE + formData.fileName}
+              style={{ width: '100%' }}
+            ></img>
+          ) : (
+            ''
+          )}
+          <div
+            className="code"
+            style={{ top: formData.qrY + '%', left: formData.qrX + '%' }}
           >
-            {formData.fileName !== '' ? (
-              <img
-                src={process.env.REACT_APP_SERVER_PORT_FILE + formData.fileName}
-                style={{ display: 'block', width: '100%' }}
-              ></img>
-            ) : (
-              ''
-            )}
-            <div
-              className="code"
-              style={{ top: formData.qrY + '%', left: formData.qrX + '%' }}
-            >
-              <QRCode
-                id="qrCode"
-                value="https://baidu.com"
-                size={formData.qrSize} // 二维码的大小
-                fgColor="#000000" // 二维码的颜色
-                style={{ margin: 'auto' }}
-              ></QRCode>
-            </div>
-            <div
-              className="code"
-              style={{
-                fontSize: formData.fontSize,
-                top: formData.agentY + '%',
-                left: formData.agentX + '%',
-                color: formData.color,
-              }}
-            >
-              文字
-            </div>
-            <div
-              className="code"
-              style={{
-                fontSize: formData.fontSize,
-                top: formData.dateY + '%',
-                left: formData.dateX + '%',
-                color: formData.color,
-              }}
-            >
-              日期
-            </div>
-          </Upload>
-        </div>
-      </Col>
-      <Col span={18}>
+            <QRCode
+              id="qrCode"
+              value="https://baidu.com"
+              size={formData.qrSize} // 二维码的大小
+              fgColor="#000000" // 二维码的颜色
+              style={{ margin: 'auto' }}
+            ></QRCode>
+          </div>
+          <div
+            className="code"
+            style={{
+              fontSize: formData.fontSize,
+              top: formData.agentY + '%',
+              left: formData.agentX + '%',
+              color: formData.color,
+            }}
+          >
+            文字
+          </div>
+          <div
+            className="code"
+            style={{
+              fontSize: formData.fontSize,
+              top: formData.dateY + '%',
+              left: formData.dateX + '%',
+              color: formData.color,
+            }}
+          >
+            日期
+          </div>
+        </Upload>
+      </div>
+      <div className="promotion-form">
         <Form
           name="basic"
           labelCol={{ span: 8 }}
@@ -228,8 +226,8 @@ const Promotion = () => {
             </Button>
           </Form.Item>
         </Form>
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };
 
