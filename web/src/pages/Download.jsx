@@ -45,78 +45,69 @@ const Download = () => {
     });
   };
   return (
-    <Layout className="content" style={{ height: '100vh' }}>
-      <Header style={{ width: '100%' }}>
-        <Menu theme="dark" mode="horizontal"></Menu>
-      </Header>
-      <Content style={{ padding: '10px 30px', background: '#fff' }}>
-        <div className="promotion">
-          <div className="imgBox" id="download">
-            <Upload
-              name="img"
-              listType="picture-card"
-              className="avatar-uploader"
-              disabled
-              showUploadList={false}
-            >
-              {formData.fileName !== '' ? (
-                <img
-                  src={
-                    process.env.REACT_APP_SERVER_PORT_FILE + formData.fileName
-                  }
-                  style={{ display: 'block', width: '100%' }}
-                  alt="avatar"
-                ></img>
-              ) : (
-                ''
-              )}
-              <div
-                className="code"
-                style={{
-                  top: formData.qrY + '%',
-                  left: formData.qrX + '%',
-                }}
-              >
-                <QRCode
-                  id="qrCode"
-                  value={data.url}
-                  size={formData.qrSize} // 二维码的大小
-                  fgColor="#000000" // 二维码的颜色
-                  style={{ margin: 'auto' }}
-                ></QRCode>
-              </div>
-              <div
-                className="code"
-                style={{
-                  fontSize: formData.fontSize,
-                  top: formData.agentY + '%',
-                  left: formData.agentX + '%',
-                  color: formData.color,
-                }}
-              >
-                {data.text}
-              </div>
-              <div
-                className="code"
-                style={{
-                  fontSize: formData.fontSize,
-                  top: formData.dateY + '%',
-                  left: formData.dateX + '%',
-                  color: formData.color,
-                }}
-              >
-                {data.date}
-              </div>
-            </Upload>
+    <div className="promotion">
+      <div className="imgBox" id="download">
+        <Upload
+          name="img"
+          listType="picture-card"
+          className="avatar-uploader"
+          disabled
+          showUploadList={false}
+        >
+          {formData.fileName !== '' ? (
+            <img
+              src={process.env.REACT_APP_SERVER_PORT_FILE + formData.fileName}
+              style={{ display: 'block', width: '100%' }}
+              alt="avatar"
+            ></img>
+          ) : (
+            ''
+          )}
+          <div
+            className="code"
+            style={{
+              top: formData.qrY + '%',
+              left: formData.qrX + '%',
+            }}
+          >
+            <QRCode
+              id="qrCode"
+              value={data.url}
+              size={formData.qrSize} // 二维码的大小
+              fgColor="#000000" // 二维码的颜色
+              style={{ margin: 'auto' }}
+            ></QRCode>
           </div>
-          <div className="promotion-form">
-            <Button type="primary" onClick={download}>
-              下载
-            </Button>
+          <div
+            className="code"
+            style={{
+              fontSize: formData.fontSize,
+              top: formData.agentY + '%',
+              left: formData.agentX + '%',
+              color: formData.color,
+            }}
+          >
+            {data.text}
           </div>
-        </div>
-      </Content>
-    </Layout>
+          <div
+            className="code"
+            style={{
+              fontSize: formData.fontSize,
+              top: formData.dateY + '%',
+              left: formData.dateX + '%',
+              color: formData.color,
+            }}
+          >
+            {data.date}
+          </div>
+        </Upload>
+      </div>
+      <div className="promotion-form">
+        <Button type="primary" onClick={download}>
+          下载
+        </Button>
+      </div>
+    </div>
   );
 };
 

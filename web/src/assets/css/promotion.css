@@ -10,10 +10,12 @@
   height: 100%;
 }
 .avatar-uploader > .ant-upload-select-picture-card {
+  margin: 0;
   height: 100%;
   width: 100%;
 }
 .avatar-uploader > .ant-upload-select-picture-card > .ant-upload {
+  min-height: 200px;
   width: 100%;
 }
 
